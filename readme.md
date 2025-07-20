@@ -1,3 +1,5 @@
+Technologies used: FASTAPI, Wallarm Node,Docker + Docker Compose, GoTestWaf and VSCode for the development environment.
+
 
 This project sets up a Wallarm Filtering Node in front of a FastAPI demo which is then used for integration to GoTestWAF to simulate attack traffic and test if the WAF worked.
 First thing is creating the wallarm filtering node- wallarm svsDocker image: `wallarm/node:6.3.0`
@@ -27,14 +29,10 @@ Issues I ran into was setting the coorect ports for the docker from(8080 to 8000
 |      GoTestWAF           |
 |   (simulated attacks)    |
 
-            |
-
 |    Wallarm WAF (8080)    |
 |                          |
 |  Filters malicious traffic|
-            |
-            v
-
+            
 |     FastAPI App (8000)   |
 |       Returns Report    |
 
