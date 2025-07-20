@@ -1,0 +1,1 @@
+docker run --rm -v ./reports:/app/reports --network wallarm-demo_wallarm-net -it wallarm/gotestwaf --url=http://localhost:80/demo

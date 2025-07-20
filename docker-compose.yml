@@ -1,0 +1,39 @@
+version: '3'
+
+
+services:
+
+# waf itself
+  wallarm-svc:
+    image: wallarm/node:6.3.0
+    ports:
+      - 8080:80
+    environment:
+      WALLARM_API_TOKEN: DGYfnKTIulHYXCrXH9HwDrzU+nSL2NCeCdy8n4j3cJHUri8vHfpEr4jiXFG/8Pan
+      WALLARM_LABELS: 'group=fastapi-grp'
+      NGINX_BACKEND: 'http://api-svc:8000'
+      WALLARM_API_HOST: 'us1.api.wallarm.com'
+    networks:
+      - wallarm-net
+
+# load test service
+
+  # gotestwaf-svc:
+  #   image: wallarm/gotestwaf
+  #   command: --url=http://api-svc:8080/demo
+  #   volumes:
+  #     - ./reports:/app/reports
+  #   networks:
+  #     - wallarm-net
+    
+
+# demo api
+  api-svc:
+    build: ./src
+    ports:
+      - 8000:8000
+    networks:
+      - wallarm-net
+
+networks:
+  wallarm-net:
